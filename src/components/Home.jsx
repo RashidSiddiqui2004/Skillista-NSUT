@@ -4,7 +4,7 @@ import Wrapper from './Wrapper'
 import Heropage from './Heropage'
 import Features from './Features'
 
-const Home = ({ state }) => {
+const Home = ({ }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
