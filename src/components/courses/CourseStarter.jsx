@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import formData from "./FormData";
+import formData, { getNextQuestionSet, experienceForm } from "./FormData";
 
 const CourseStarter = ({ handleFormSubmit }) => {
     const [formId, setFormId] = useState(0);
-    const [filledFormData, setFilledFormData] = useState({}); // Stores user responses
+    const [formSteps, setFormSteps] = useState([...formData]);
+    const [filledFormData, setFilledFormData] = useState({});
 
-    const numberOfForms = formData.length;
+    const numberOfForms = formSteps.length;
     const isPreviousBtnDisabled = formId === 0;
     const isLastForm = formId === numberOfForms - 1;
 
-    // Handle radio button selection
     const handleSelection = (value) => {
+        const currentTitle = formSteps[formId].title;
         setFilledFormData((prev) => ({
             ...prev,
-            [formData[formId].title]: value,
+            [currentTitle]: value,
         }));
+
+        if (formId === 0) {
+            const nextForm = getNextQuestionSet(value);
+            setFormSteps([formData[0], nextForm, experienceForm]);
+        }
     };
 
     const handlePrev = () => {
@@ -32,10 +38,9 @@ const CourseStarter = ({ handleFormSubmit }) => {
 
     return (
         <div className="bg-white text-slate-900 mx-[20vw] p-5 py-[5vh] rounded-md text-left shadow-lg" id="courses">
-            <h1 className="text-3xl font-semibold">{formData[formId].title}</h1>
-            <h2 className="my-2 text-lg font-semibold text-slate-600">{formData[formId].subtitle}</h2>
+            <h1 className="text-3xl font-semibold">{formSteps[formId].title}</h1>
+            <h2 className="my-2 text-lg font-semibold text-slate-600">{formSteps[formId].subtitle}</h2>
 
-            {/* Animated Form Options */}
             <AnimatePresence mode="wait">
                 <motion.div
                     key={formId}
@@ -45,7 +50,7 @@ const CourseStarter = ({ handleFormSubmit }) => {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col gap-4 items-start w-full"
                 >
-                    {formData[formId].questions.map((option) => (
+                    {formSteps[formId].questions.map((option) => (
                         <label
                             key={option.value}
                             className="flex items-center gap-3 cursor-pointer p-3 rounded-xl border-2
@@ -56,7 +61,7 @@ const CourseStarter = ({ handleFormSubmit }) => {
                                 name={`question-${formId}`}
                                 value={option.value}
                                 className="hidden peer"
-                                checked={filledFormData[formData[formId].title] === option.value}
+                                checked={filledFormData[formSteps[formId].title] === option.value}
                                 onChange={() => handleSelection(option.value)}
                             />
                             <div className="w-5 h-5 border-2 border-[#00FFFB] rounded-full flex items-center 
@@ -69,7 +74,6 @@ const CourseStarter = ({ handleFormSubmit }) => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* Navigation Buttons */}
             <div className="flex justify-between mt-6">
                 <button
                     onClick={handlePrev}

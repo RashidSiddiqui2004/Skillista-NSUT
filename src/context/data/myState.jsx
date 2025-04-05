@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import MyContext from './myContext'
 import {
     Timestamp, addDoc, collection, deleteDoc, doc, getDocs,
-    onSnapshot, orderBy, query, setDoc, getDoc, updateDoc,
+    onSnapshot, orderBy, query, setDoc, getDoc,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { where } from 'firebase/firestore';
 import { fireDB } from '../../firebase/FirebaseConfig';
+import FormTagsMap from '../../utils/courseMetaData';
+import { List } from 'reactstrap';
 
 function myState(props) {
 
@@ -31,7 +33,6 @@ function myState(props) {
             return [];
         }
     };
-
 
     const searchUsersBySkill = async (skill) => {
 
@@ -318,7 +319,50 @@ function myState(props) {
             setLoading(false)
             return false;
         }
+    }
 
+    const [recommendedCourses, setRecommendedCourses] = useState([]);
+
+    const getRecommendedCourses = async (formResponses) => {
+        setLoading(true)
+
+        const responseToQ1 = formResponses[0];
+        const tagsForQ1 = FormTagsMap.formQ1[responseToQ1] || [];
+
+        const responseToQ2 = formResponses[1];
+        const tagsForQ2 = FormTagsMap.formQ2[responseToQ2] || [];
+
+        const combinedTags = new Set([...tagsForQ1, ...tagsForQ2]);
+
+        try {
+            const q = query(
+                collection(fireDB, 'courses')
+            );
+
+            const data = onSnapshot(q, (QuerySnapshot) => {
+                let coursesArray = [];
+
+                QuerySnapshot.forEach((doc) => {
+                    const courseTags = doc.data()['skills'];
+
+                    for (let index = 0; index < courseTags.length; index++) {
+                        if (combinedTags.has(courseTags[index])) {
+                            coursesArray.push({ ...doc.data(), id: doc.id });
+                            break;
+                        }
+                    }
+                });
+
+                setRecommendedCourses(coursesArray);
+                setLoading(false);
+            });
+
+            return true;
+
+        } catch (error) {
+            setLoading(false)
+            return false;
+        }
     }
 
     const enrollCourse = async (userId, courseId) => {
@@ -467,6 +511,8 @@ function myState(props) {
             enrollCourse,
             getMyCourses,
             isEnrolledinCourse,
+            recommendedCourses,
+            getRecommendedCourses
         }}>
             {props.children}
         </MyContext.Provider>

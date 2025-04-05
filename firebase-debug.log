@@ -1,13 +1,14 @@
-[debug] [2025-04-01T08:41:45.394Z] ----------------------------------------------------------------------
-[debug] [2025-04-01T08:41:45.398Z] Command:       D:\New Softwares\nodejs\node.exe C:\Users\Arshad\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2025-04-01T08:41:45.399Z] CLI Version:   13.14.1
-[debug] [2025-04-01T08:41:45.399Z] Platform:      win32
-[debug] [2025-04-01T08:41:45.399Z] Node Version:  v22.14.0
-[debug] [2025-04-01T08:41:45.399Z] Time:          Tue Apr 01 2025 14:11:45 GMT+0530 (India Standard Time)
-[debug] [2025-04-01T08:41:45.400Z] ----------------------------------------------------------------------
+[debug] [2025-04-05T17:57:23.665Z] ----------------------------------------------------------------------
+[debug] [2025-04-05T17:57:23.671Z] Command:       D:\New Softwares\nodejs\node.exe C:\Users\Arshad\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2025-04-05T17:57:23.672Z] CLI Version:   13.14.1
+[debug] [2025-04-05T17:57:23.672Z] Platform:      win32
+[debug] [2025-04-05T17:57:23.672Z] Node Version:  v22.14.0
+[debug] [2025-04-05T17:57:23.673Z] Time:          Sat Apr 05 2025 23:27:23 GMT+0530 (India Standard Time)
+[debug] [2025-04-05T17:57:23.673Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2025-04-01T08:41:45.461Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2025-04-01T08:41:45.461Z] > authorizing via signed-in user (siddiqui20042007@gmail.com)
+[debug] [2025-04-05T17:57:23.679Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-04-05T17:57:24.032Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-05T17:57:24.032Z] > authorizing via signed-in user (siddiqui20042007@gmail.com)
 [info] 
      ######## #### ########  ######## ########     ###     ######  ########
      ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
@@ -23,25 +24,5 @@ Before we get started, keep in mind:
 
   * You are initializing within an existing Firebase project directory
 
-[info] 
-=== Project Setup
-[info] 
-[info] First, let's associate this project directory with a Firebase project.
-[info] You can create multiple project aliases by running firebase use --add, 
-[info] but for now we'll just set up a default project.
-[info] 
-[debug] [2025-04-01T08:42:52.054Z] Using project from CLI flag: fin-vue
-[debug] [2025-04-01T08:42:52.057Z] > refreshing access token with scopes: []
-[debug] [2025-04-01T08:42:52.060Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2025-04-01T08:42:52.060Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2025-04-01T08:42:52.483Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2025-04-01T08:42:52.483Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2025-04-01T08:42:52.517Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue [none]
-[debug] [2025-04-01T08:42:53.508Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue 200
-[debug] [2025-04-01T08:42:53.509Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue {"projectId":"fin-vue","projectNumber":"752839694493","displayName":"Fin-Vue","name":"projects/fin-vue","resources":{"hostingSite":"fin-vue","realtimeDatabaseInstance":"fin-vue-default-rtdb","locationId":"asia-south1"},"state":"ACTIVE","etag":"1_c6191f77-49de-48c2-ad15-2b2c66fd522b"}
-[info] i  Using project fin-vue (Fin-Vue) 
-[info] 
-=== Hosting Setup
-[debug] [2025-04-01T08:42:53.525Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue [none]
-[debug] [2025-04-01T08:42:54.233Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue 200
-[debug] [2025-04-01T08:42:54.233Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fin-vue {"projectId":"fin-vue","projectNumber":"752839694493","displayName":"Fin-Vue","name":"projects/fin-vue","resources":{"hostingSite":"fin-vue","realtimeDatabaseInstance":"fin-vue-default-rtdb","locationId":"asia-south1"},"state":"ACTIVE","etag":"1_c6191f77-49de-48c2-ad15-2b2c66fd522b"}
+[debug] [2025-04-05T17:57:24.943Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-04-05T17:57:24.943Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}

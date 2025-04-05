@@ -62,8 +62,7 @@ const ContactPage = () => {
     const handleFileUpload = async (event) => {
 
         const files = event.target.files;
-
-        let fileURL = null;
+ 
         const file = files[0];
 
         const uploadedFileURL = await uploadFile(file, 'resumes');

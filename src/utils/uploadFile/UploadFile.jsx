@@ -1,4 +1,4 @@
-import { auth, storage } from "../../firebase/FirebaseConfig";
+import { storage } from "../../firebase/FirebaseConfig";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Function to upload a file and get its download URL
@@ -18,9 +18,8 @@ export const uploadFile = async (file, folderName) => {
         const storageRef = ref(storage, `${folderName}/${customFormattedDateTime}-${file.name}`);
 
         // Upload the file
-        const snapshot = await uploadBytes(storageRef, file);
+        await uploadBytes(storageRef, file);
 
-        // Get the download URL
         const downloadURL = await getDownloadURL(storageRef);
 
         return downloadURL;

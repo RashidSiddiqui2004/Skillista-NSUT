@@ -6,10 +6,7 @@ const CourseCard = ({ course, isEnrolled }) => {
 
     const context = useContext(myContext);
     const { enrollCourse } = context;
-
-    const cardClasses = 'bg-gray-800 rounded-md shadow-md p-4 flex-grow h-full text-white font1';
-    const buttonClasses = 'px-4 py-2 rounded-md hover:scale-95 transition-all focus:outline-none cursor-pointer focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
-
+ 
     const userData = JSON.parse(localStorage.getItem('user'));
 
     const enrollCourseFn = async () => {
@@ -28,7 +25,7 @@ const CourseCard = ({ course, isEnrolled }) => {
             <h2 className="text-xl font-bold mb-3 text-teal-300">{course.title}</h2>
 
             {/* Description */}
-            <p className="text-sm text-gray-300 mb-4">{course.description}</p>
+            <p className="text-sm text-gray-300 mb-4">{course.description.slice(0, 250)}...</p>
 
             {/* Skills */}
             <ul className="flex flex-wrap gap-2 mb-4">

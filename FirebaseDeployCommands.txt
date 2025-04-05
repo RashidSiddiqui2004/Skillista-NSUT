@@ -1,7 +1,10 @@
 firebase login
 
-firebase init
-
 npm run build
 
-firebase deploy
+firebase init hosting
+
+firebase target:apply hosting skillista skillista
+
+firebase deploy --only hosting:skillista
+

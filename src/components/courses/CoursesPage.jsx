@@ -23,7 +23,7 @@ const CoursesPage = () => {
 
     return (
 
-        <div className='my-10'>
+        <div className='my-10 px-4'>
 
             {
                 !toggle ?

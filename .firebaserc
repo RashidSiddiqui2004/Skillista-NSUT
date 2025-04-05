@@ -1,5 +1,16 @@
 {
   "projects": {
     "default": "fin-vue"
-  }
+  },
+  "targets": {
+    "fin-vue": {
+      "hosting": {
+        "skillista": [
+          "skillista"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
