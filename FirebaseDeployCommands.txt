@@ -5,6 +5,22 @@ npm run build
 firebase init hosting
 
 firebase target:apply hosting skillista skillista
+{
+  "hosting": [
+    {
+      "target": "skillista",
+      "source": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "frameworksBackend": {
+        "region": "asia-east1"
+      }
+    }
+  ]
+}
 
 firebase deploy --only hosting:skillista
 

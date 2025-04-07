@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import myContext from '../../context/data/myContext';
 import Wrapper from '../Wrapper';
-import courseImage from '/course.jpg';
 
 const CoursePage = () => {
 
@@ -21,7 +20,6 @@ const CoursePage = () => {
 
     const userData = JSON.parse(localStorage.getItem('user'));
 
-
     const enrollCourseFn = async () => {
 
         if (userData.uid === null || userData.uid === undefined) {
@@ -32,11 +30,58 @@ const CoursePage = () => {
                 setisEnrolled(true);
             }
         }
-
     }
 
+    const dummyChapters = [
+        {
+            title: "Introduction to Course", videoUrl: "Vi9bxu-M-ag?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Are you interested in becoming a Full Stack Web Developer using MERN stack? Look no further! In this tutorial series, we'll cover everything you need to know to become a Full Stack Web Developer using MongoDB, Express, React, and Node.js.",
+            resources: [
+                { title: "Sklearn Linear Regression Docs", url: "https://scikit-learn.org/stable/modules/linear_model.html" },
+                { title: "Gradient Descent Visualizer", url: "https://www.desmos.com/calculator" },
+            ],
+            downloads: [
+                { label: "Lecture Slides (PDF)", url: "/downloads/linear-regression-slides.pdf" },
+                { label: "Cheatsheet", url: "/downloads/linear-regression-cheatsheet.pdf" },
+            ],
+        },
+        {
+            title: "Setting Up Your Environment", videoUrl: "aRUhd1Wd3Sw?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Are you new to web development and want to learn the fundamentals? In this video, we'll cover the basics of the internet, networks, the World Wide Web, clients, servers, browsers, and browser engines. By the end of this video, you'll have a solid understanding of these key concepts and be ready to dive deeper into web development.",
+            resources: [
+                { title: "Sklearn Linear Regression Docs", url: "https://scikit-learn.org/stable/modules/linear_model.html" },
+                { title: "Gradient Descent Visualizer", url: "https://www.desmos.com/calculator" },
+            ],
+            downloads: [
+                { label: "Lecture Slides (PDF)", url: "/downloads/linear-regression-slides.pdf" },
+                { label: "Cheatsheet", url: "/downloads/linear-regression-cheatsheet.pdf" },
+            ],
+        },
+        {
+            title: "Core Concepts & Architecture", videoUrl: "0gU-qrq3gjU?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Understand the fundamentals.",
+            resources: [
+                { title: "Sklearn Linear Regression Docs", url: "https://scikit-learn.org/stable/modules/linear_model.html" },
+                { title: "Gradient Descent Visualizer", url: "https://www.desmos.com/calculator" },
+            ],
+            downloads: [
+                { label: "Lecture Slides (PDF)", url: "/downloads/linear-regression-slides.pdf" },
+                { label: "Cheatsheet", url: "/downloads/linear-regression-cheatsheet.pdf" },
+            ],
+        },
+        {
+            title: "Hands-on Project Demo", videoUrl: "ILxYkSVU9-k?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Welcome to our comprehensive web development course using the MERN stack! In this video, we delve into the fascinating world of in CSS by creating a Recipe Website.",
+            resources: [
+                { title: "Sklearn Linear Regression Docs", url: "https://scikit-learn.org/stable/modules/linear_model.html" },
+                { title: "Gradient Descent Visualizer", url: "https://www.desmos.com/calculator" },
+            ],
+            downloads: [
+                { label: "Lecture Slides (PDF)", url: "/downloads/linear-regression-slides.pdf" },
+                { label: "Cheatsheet", url: "/downloads/linear-regression-cheatsheet.pdf" },
+            ],
+        },
+    ];
 
-    const buttonClasses = 'px-4 py-2 rounded-md hover:scale-95 transition-all focus:outline-none cursor-pointer focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
+    const [currentChapter, setCurrentChapter] = useState(0);
+    const chapter = dummyChapters[currentChapter];
+
 
     useEffect(() => {
         const getData = async () => {
@@ -54,52 +99,118 @@ const CoursePage = () => {
 
     return (
         <Wrapper>
-            <div className='grid grid-cols-12 justify-around gap-5 px-4'>
+            <div className="grid grid-cols-12 py-10">
 
-                <div className='col-span-12 sm:col-span-3 border-2'>
-                    <img src={courseImage} alt="crsimage" className='h-full w-[100vw]' />
-
-                </div>
-
-                <div className='col-span-12 sm:col-span-9 border-2 font1 py-3 px-8'>
-
-                    <h1 className='text-3xl font-semibold'>{courseData?.title}</h1>
-
-                    <h2 className='text-lg sm:text-sm my-3 text-wrap text-left'>
-                        {courseData?.description}
-                    </h2>
-
-                    <h2 className='text-lg text-left italic sm:mt-10'>You will get to learn these skills</h2>
-
-                    <ul className="flex flex-col sm:flex-row text-wrap px-5 my-2 gap-2
-                     sm:gap-4 text-sm text-left">
-                        {
-                            courseData?.skills?.map((skill, index) => {
-                                return (
-                                    <li key={index} className="bg-gray-900 w-fit px-4 py-1 rounded-full text-white">{skill.toUpperCase()}</li>
-                                )
-                            })
-                        }
+                <aside className="col-span-12 sm:col-span-3 overflow-y-auto p-4 border-r border-gray-300
+                 min-h-screen py-10">
+                    <h2 className="text-xl font-semibold mb-4">Course Content</h2>
+                    <ul className="flex flex-col gap-3">
+                        {dummyChapters.map((item, index) => (
+                            <li
+                                key={index}
+                                onClick={() => setCurrentChapter(index)}
+                                className={`cursor-pointer px-3 py-2 rounded-md transition-all 
+                ${index === currentChapter
+                                        ? "bg-blue-600 text-white font-semibold"
+                                        : "bg-white text-slate-700 hover:bg-blue-100"}`}
+                            >
+                                {index + 1}. {item.title}
+                            </li>
+                        ))}
                     </ul>
+                </aside>
 
-                    <h2 className='text-start text-lg sm:my-12'>Course Price <span className='bg-slate-800 px-4 py-1 rounded-md ml-3'>Rs.{courseData?.cost}.00</span></h2>
 
-                    <div className=' flex flex-col sm:flex-row justify-around'>
-                        <button className={`${buttonClasses} bg-green-500 text-slate-900 
-                        font-bold text-2xl px-5 sm:text-lg my-6 sm:my-4 cursor-pointer`}
-                            disabled={isEnrolled} onClick={enrollCourseFn}>
-                            {!isEnrolled ? 'Enroll Now' : 'Continue from where you left..'}
-                        </button>
-                        <button className={` text-slate-900 bg-slate-300 rounded-full py-1
-                        font-bold text-lg px-5 sm:text-sm my-6 sm:my-4`}>
-                            * 200+ Learners Already Enrolled
-                        </button>
+                <main className="col-span-12 sm:col-span-9 p-6 overflow-y-auto my-4 flex flex-col gap-8">
+
+                    {/* Video Player */}
+                    <div className="w-full aspect-video rounded-xl overflow-hidden shadow-xl border border-slate-700">
+                        <iframe
+                            src={`https://www.youtube.com/embed/${chapter.videoUrl}`}
+                            title={chapter.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                            className="w-full h-full"
+                        ></iframe>
                     </div>
 
+                    {/* Chapter Content */}
+                    <div className="text-left">
+                        <h1 className="text-3xl font-bold text-slate-100 mb-2">{chapter.title}</h1>
+                        <p className="text-lg text-slate-300 leading-relaxed tracking-wide">
+                            {chapter.description}
+                        </p>
+                    </div>
 
-                </div>
+                    {/* Resources Section */}
+                    <div className="text-left">
+                        <h2 className="text-xl font-semibold text-slate-200 mb-2">Resources</h2>
+                        <ul className="list-disc ml-5 space-y-1 text-slate-300 text-base">
+                            {chapter.resources?.map((resource, i) => (
+                                <li key={i}>
+                                    <a
+                                        href={resource.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-400 hover:underline"
+                                    >
+                                        {resource.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Downloads Section */}
+                    <div className="text-left">
+                        <h2 className="text-xl font-semibold text-slate-200 mb-2">Downloads</h2>
+                        <ul className="space-y-2">
+                            {chapter.downloads?.map((item, i) => (
+                                <li key={i}>
+                                    <a
+                                        href={item.url}
+                                        download
+                                        className="inline-block px-4 py-2 bg-slate-800 text-slate-100 max-w-xs w-full rounded-md hover:bg-slate-700 transition"
+                                    >
+                                        📄 {item.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                </main>
+
+
+                {/* <main className="col-span-12 sm:col-span-9 p-6 overflow-y-auto my-4 flex flex-col gap-6">
+ 
+                    <div className="w-full h-[300px] sm:h-[450px] mb-6 rounded-xl overflow-hidden shadow-lg">
+                        <iframe
+                            src={`https://www.youtube.com/embed/${chapter.videoUrl}`}
+                            title={chapter.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                            className="w-full h-full"
+                        ></iframe>
+                    </div>
+ 
+                    <div className="text-left">
+                        <h1 className="text-3xl font-bold text-slate-100 mb-3">{chapter.title}</h1>
+                        <p className="text-lg text-slate-300 leading-relaxed tracking-wide">
+                            {chapter.description}
+                        </p>
+                    </div>
+
+                    <div>
+                        Assignments 
+                    </div>
+
+                </main> */}
 
             </div>
+
         </Wrapper>
     )
 }

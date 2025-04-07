@@ -7,7 +7,7 @@ const Wrapper = ({ children }) => {
   return (
     <div className='relative bg-slate-950 min-h-screen'>
       <Navbar />
-      <div className='py-24 sm:py-20'>
+      <div>
         {children}
       </div>
       <Footer />
