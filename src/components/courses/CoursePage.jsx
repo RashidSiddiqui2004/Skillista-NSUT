@@ -56,7 +56,7 @@ const CoursePage = () => {
             ],
         },
         {
-            title: "Core Concepts & Architecture", videoUrl: "0gU-qrq3gjU?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Understand the fundamentals.",
+            title: "Core Concepts & Architecture", videoUrl: "0gU-qrq3gjU?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD", description: "Welcome to our comprehensive web development course using the MERN stack! In this video, we delve into the fascinating world of in CSS by creating a Recipe Website.",
             resources: [
                 { title: "Sklearn Linear Regression Docs", url: "https://scikit-learn.org/stable/modules/linear_model.html" },
                 { title: "Gradient Descent Visualizer", url: "https://www.desmos.com/calculator" },
@@ -99,10 +99,10 @@ const CoursePage = () => {
 
     return (
         <Wrapper>
-            <div className="grid grid-cols-12 py-10">
+            <div className="grid grid-cols-12 border-2 rounded-md">
 
-                <aside className="col-span-12 sm:col-span-3 overflow-y-auto p-4 border-r border-gray-300
-                 min-h-screen py-10">
+                <aside className="col-span-12 sm:col-span-3 overflow-y-auto px-4 border-r border-gray-300
+                 min-h-screen py-10 my-0 bg-gray-800">
                     <h2 className="text-xl font-semibold mb-4">Course Content</h2>
                     <ul className="flex flex-col gap-3">
                         {dummyChapters.map((item, index) => (
@@ -124,24 +124,29 @@ const CoursePage = () => {
                 <main className="col-span-12 sm:col-span-9 p-6 overflow-y-auto my-4 flex flex-col gap-8">
 
                     {/* Video Player */}
-                    <div className="w-full aspect-video rounded-xl overflow-hidden shadow-xl border border-slate-700">
-                        <iframe
-                            src={`https://www.youtube.com/embed/${chapter.videoUrl}`}
-                            title={chapter.title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                            className="w-full h-full"
-                        ></iframe>
+
+                    <div className='grid grid-cols-2 gap-4'>
+                        <div className="aspect-video rounded-3xl overflow-hidden shadow-xl
+                        border border-slate-700">
+                            <iframe
+                                src={`https://www.youtube.com/embed/${chapter.videoUrl}`}
+                                title={chapter.title}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                                className="w-full h-full"
+                            ></iframe>
+                        </div>
+
+                        {/* Chapter Content */}
+                        <div className="text-left">
+                            <h1 className="text-xl font-bold text-slate-100 mb-2">{chapter.title}</h1>
+                            <p className="text-sm text-slate-300 leading-relaxed tracking-wide">
+                                {chapter.description}
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Chapter Content */}
-                    <div className="text-left">
-                        <h1 className="text-3xl font-bold text-slate-100 mb-2">{chapter.title}</h1>
-                        <p className="text-lg text-slate-300 leading-relaxed tracking-wide">
-                            {chapter.description}
-                        </p>
-                    </div>
 
                     {/* Resources Section */}
                     <div className="text-left">

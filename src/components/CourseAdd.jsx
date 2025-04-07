@@ -43,19 +43,18 @@ const CourseAdd = () => {
     const navigate = useNavigate();
 
     const courseupload = async () => {
-        setLoading(true)
+
 
         if (title === "" || cost === "" || selectedDomain === '' || desc === '') {
             return toast.error("All fields are required")
-            setLoading(false);
         }
         else if (desc.length < 10) {
             return toast.info("Please add more description!")
-            setLoading(false);
         }
         else {
+            setLoading(true)
             await createCourse(title, cost, selectedDomain, desc, skills);
-            setLoading(false);
+            setLoading(false)
         }
 
     }

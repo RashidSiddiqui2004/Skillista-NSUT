@@ -9,9 +9,7 @@ const HireHer = ({ state }) => {
     }, [])
     return (
         <Wrapper>
-            <>
-                <HireherPage />
-            </>
+            <HireherPage />
         </Wrapper>
     )
 }

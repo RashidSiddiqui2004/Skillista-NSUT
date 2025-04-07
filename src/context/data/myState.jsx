@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { where } from 'firebase/firestore';
 import { fireDB } from '../../firebase/FirebaseConfig';
 import FormTagsMap from '../../utils/courseMetaData';
-import { List } from 'reactstrap';
 
 function myState(props) {
 
@@ -22,8 +21,8 @@ function myState(props) {
             const usersSnapshot = await getDocs(usersCollectionRef);
 
             if (!usersSnapshot.empty) {
-                const matchedUsers = usersSnapshot.docs.map(doc => doc.data());
-                return matchedUsers;
+                const allUsers = usersSnapshot.docs.map(doc => doc.data());
+                return allUsers;
 
             } else {
                 return [];
