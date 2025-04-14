@@ -6,7 +6,7 @@ const CourseCard = ({ course, isEnrolled }) => {
 
     const context = useContext(myContext);
     const { enrollCourse } = context;
- 
+
     const userData = JSON.parse(localStorage.getItem('user'));
 
     const enrollCourseFn = async () => {
@@ -14,20 +14,18 @@ const CourseCard = ({ course, isEnrolled }) => {
         if (userData.uid === null || userData.uid === undefined) {
             toast.info('Please register with Us to continue')
         } else {
-            const isdone = await enrollCourse(userData?.uid, course.id);
+            await enrollCourse(userData?.uid, course.id);
         }
 
     }
 
     return (
         <div className="bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full text-white font1 transition-all hover:shadow-2xl hover:-translate-y-1">
-            {/* Course Title */}
+
             <h2 className="text-xl font-bold mb-3 text-teal-300">{course.title}</h2>
 
-            {/* Description */}
             <p className="text-sm text-gray-300 mb-4">{course.description.slice(0, 250)}...</p>
 
-            {/* Skills */}
             <ul className="flex flex-wrap gap-2 mb-4">
                 {course.skills.map((skill, index) => (
                     <li
@@ -39,7 +37,6 @@ const CourseCard = ({ course, isEnrolled }) => {
                 ))}
             </ul>
 
-            {/* Buttons */}
             <div className="flex justify-center items-center gap-4 mt-auto">
                 {!isEnrolled && (
                     <button

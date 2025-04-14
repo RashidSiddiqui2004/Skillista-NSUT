@@ -9,7 +9,7 @@ const MyCourses = () => {
 
     const { getMyCourses } = context;
 
-    const [myCourses, setMyCourses] = useState(null);
+    const [myCourses, setMyCourses] = useState([]);
 
     const skillHer = () => {
         window.location.href = "#courses"
@@ -20,13 +20,13 @@ const MyCourses = () => {
     useEffect(() => {
         const fetchData = async () => {
             const crsesdata = await getMyCourses(userData?.uid);
-            setMyCourses(crsesdata)
+            setMyCourses(crsesdata);
         }
-        
-        window.scrollTo(0, 0);
 
+        window.scrollTo(0, 0);
         fetchData();
     }, [])
+
 
     return (
 
@@ -61,18 +61,23 @@ const MyCourses = () => {
                 <h1 className='text-lg text-left px-10 font1 mt-32 py-2 bg-slate-900 text-white'>My Courses</h1>
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-3 pt-3 py-5' id='courses'>
+
                     {
-                        myCourses?.map((course, index) => {
-                            return (
+                        myCourses && myCourses.length === 0 ? (
+                            <div className="col-span-full text-center py-10">
+                                <h1 className="text-white text-2xl font-semibold font1">No enrollments yet</h1>
+                                <p className="text-slate-400 mt-2 text-sm">Enroll in a course to start your upskilling journey.</p>
+                            </div>
+                        ) : (
+                            myCourses?.map((course, index) => (
                                 <div key={index} className='col-span-1'>
                                     <CourseCard course={course} isEnrolled={true} />
                                 </div>
-
-                            )
-                        })
+                            ))
+                        )
                     }
-
                 </div>
+
             </div>
         </Wrapper>
 

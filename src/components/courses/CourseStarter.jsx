@@ -9,10 +9,11 @@ const CourseStarter = ({ handleFormSubmit }) => {
 
     const numberOfForms = formSteps.length;
     const isPreviousBtnDisabled = formId === 0;
-    const isLastForm = formId === numberOfForms - 1;
+    const isLastForm = (formId === numberOfForms - 1);
 
     const handleSelection = (value) => {
         const currentTitle = formSteps[formId].title;
+        
         setFilledFormData((prev) => ({
             ...prev,
             [currentTitle]: value,

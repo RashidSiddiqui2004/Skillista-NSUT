@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Wrapper from '../Wrapper'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import myContext from '../../context/data/myContext';
 import { FaStar } from "react-icons/fa6";
 
@@ -9,6 +9,7 @@ import femaleProfileimg from '/profile.png'
 import MaleProfileimg from '/maleProfile.jpg'
 import { uploadFile } from '../../utils/uploadFile/UploadFile';
 import { toast } from 'react-toastify';
+import MinyCourseCard from '../courses/MinyCourseCard';
 
 const ContactPage = () => {
 
@@ -21,7 +22,7 @@ const ContactPage = () => {
     const context = useContext(myContext);
 
     const { loading, getUserDetails, addResume, hireUser, getMyClientsList,
-        sendAcceptMsg, fetchMyEmployees } = context;
+        sendAcceptMsg, fetchMyEmployees, getMyCourses } = context;
 
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -36,6 +37,8 @@ const ContactPage = () => {
     const [clientemail, setClientemail] = useState(user?.email);
     const [clientName, setClientName] = useState(user?.name);
     const [details, setDetails] = useState('');
+
+    const [myCourses, setMyCourses] = useState([]);
 
     const [needEditResume, setneedEditResume] = useState(false);
 
@@ -55,14 +58,13 @@ const ContactPage = () => {
         const tempEmpdata = await fetchMyEmployees(user?.uid);
         setcalledData(true);
         setEmployees(tempEmpdata);
-        console.log(employeesList);
     }
 
-    // Function to handle file upload
+    // Function to handle file upload 
     const handleFileUpload = async (event) => {
 
         const files = event.target.files;
- 
+
         const file = files[0];
 
         const uploadedFileURL = await uploadFile(file, 'resumes');
@@ -149,16 +151,17 @@ const ContactPage = () => {
         }
     }
 
-
     useEffect(() => {
         const fetchdata = async () => {
             const temp = await getUserDetails(userID);
             setUserdata(temp);
             const clientsdata = await getMyClientsList(userID);
             setClientsQueue(clientsdata);
+            const coursesData = await getMyCourses(userID);
+            setMyCourses(coursesData);
+
         }
         window.scrollTo(0, 0);
-
         fetchdata();
     }, [])
 
@@ -168,20 +171,20 @@ const ContactPage = () => {
 
     return (
         <Wrapper>
-            <div className='grid grid-cols-12 pt-10'>
+            <div className='grid grid-cols-12 pt-10 mb-8'>
 
                 <div className='col-span-12 sm:col-span-6 flex flex-col items-center justify-center my-auto'>
 
                     <img src={(userdata?.gender == 'female' || userdata?.gender == null) ? femaleProfileimg : MaleProfileimg} alt="userimage" className='rounded-full w-36 mx-auto' />
 
                     <div className='gap-2'>
-                        <div className='flex flex-row items-center justify-center text-slate-300 text-2xl gap-2 my-3'>
+                        {/* <div className='flex flex-row items-center justify-center text-slate-300 text-2xl gap-2 my-3'>
                             <FaStar />
                             <FaStar />
                             <FaStar />
                             <FaStar />
                             <FaStar />
-                        </div>
+                        </div> */}
                         <h3 className='font1 my-4 bg-green-400 text-slate-950
                      text-xl font-semibold rounded-full px-6 py-2'>Skillstar</h3>
 
@@ -328,8 +331,8 @@ const ContactPage = () => {
 
                                 <div className="flex flex-wrap gap-2 mb-2 ml-10">
                                     {userdata?.skills?.map((skill, index) => (
-                                        <div className='rounded-full bg-slate-800 py-2 px-4 text-sm
-                            shadow-sm shadow-green-300  hover:scale-95 transition-all' key={index}>
+                                        <div className='rounded-full bg-slate-800 py-1 px-[10px] text-sm
+                            shadow-sm shadow-green-300 hover:scale-95 transition-all' key={index}>
                                             {skill.toUpperCase()}
                                         </div>
 
@@ -518,9 +521,33 @@ const ContactPage = () => {
 
                         </div>
                     }
-                </div>
 
+                </div>
             </div>
+
+            <div className="border-t-2 my-3 p-4 text-slate-600">
+                <h1 className='text-white text-left text-2xl items-start mx-4 font1'>Enrolled Courses</h1>
+            </div>
+
+            <div
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6"
+                id="courses"
+            >
+                {myCourses && myCourses.length === 0 ? (
+                    <div className="col-span-full text-center py-10">
+                        <h1 className="text-white text-2xl font-semibold font1">No enrollments yet</h1>
+                        {/* <p className="text-slate-400 mt-2 text-sm">Enroll in a course to start your upskilling journey.</p> */}
+                    </div>
+                ) : (
+                    myCourses?.map((course, index) => (
+                        <div key={index} className="w-full">
+                            <MinyCourseCard course={course} />
+                        </div>
+                    ))
+                )}
+            </div>
+
+
         </Wrapper>
     )
 }

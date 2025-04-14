@@ -6,8 +6,7 @@ import Web3 from "web3";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// images imported here
+  
 import graphics from '/woman.jpg'
 
 const Signup = ({ saveState }) => {

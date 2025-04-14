@@ -82,7 +82,6 @@ const CoursePage = () => {
     const [currentChapter, setCurrentChapter] = useState(0);
     const chapter = dummyChapters[currentChapter];
 
-
     useEffect(() => {
         const getData = async () => {
             const temp = await getCourseData(courseId);
@@ -123,8 +122,6 @@ const CoursePage = () => {
 
                 <main className="col-span-12 sm:col-span-9 p-6 overflow-y-auto my-4 flex flex-col gap-8">
 
-                    {/* Video Player */}
-
                     <div className='grid grid-cols-2 gap-4'>
                         <div className="aspect-video rounded-3xl overflow-hidden shadow-xl
                         border border-slate-700">
@@ -138,7 +135,6 @@ const CoursePage = () => {
                             ></iframe>
                         </div>
 
-                        {/* Chapter Content */}
                         <div className="text-left">
                             <h1 className="text-xl font-bold text-slate-100 mb-2">{chapter.title}</h1>
                             <p className="text-sm text-slate-300 leading-relaxed tracking-wide">
@@ -147,8 +143,6 @@ const CoursePage = () => {
                         </div>
                     </div>
 
-
-                    {/* Resources Section */}
                     <div className="text-left">
                         <h2 className="text-xl font-semibold text-slate-200 mb-2">Resources</h2>
                         <ul className="list-disc ml-5 space-y-1 text-slate-300 text-base">
@@ -167,7 +161,6 @@ const CoursePage = () => {
                         </ul>
                     </div>
 
-                    {/* Downloads Section */}
                     <div className="text-left">
                         <h2 className="text-xl font-semibold text-slate-200 mb-2">Downloads</h2>
                         <ul className="space-y-2">
@@ -186,33 +179,6 @@ const CoursePage = () => {
                     </div>
 
                 </main>
-
-
-                {/* <main className="col-span-12 sm:col-span-9 p-6 overflow-y-auto my-4 flex flex-col gap-6">
- 
-                    <div className="w-full h-[300px] sm:h-[450px] mb-6 rounded-xl overflow-hidden shadow-lg">
-                        <iframe
-                            src={`https://www.youtube.com/embed/${chapter.videoUrl}`}
-                            title={chapter.title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
-                            className="w-full h-full"
-                        ></iframe>
-                    </div>
- 
-                    <div className="text-left">
-                        <h1 className="text-3xl font-bold text-slate-100 mb-3">{chapter.title}</h1>
-                        <p className="text-lg text-slate-300 leading-relaxed tracking-wide">
-                            {chapter.description}
-                        </p>
-                    </div>
-
-                    <div>
-                        Assignments 
-                    </div>
-
-                </main> */}
 
             </div>
 

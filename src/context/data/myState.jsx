@@ -414,7 +414,7 @@ function myState(props) {
                 progress: undefined,
                 theme: "colored",
             });
-            return null; // Return null if an error occurs
+            return null; 
         }
     };
 
@@ -462,7 +462,7 @@ function myState(props) {
             return myCourses;
 
         } catch (error) {
-            return null;
+            return [];
         }
     };
 

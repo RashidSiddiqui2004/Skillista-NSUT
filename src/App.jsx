@@ -10,8 +10,7 @@ import {
 import Home from './components/Home';
 import Signup from './components/Signup';
 import { ToastContainer } from 'react-toastify';
-import Login from './components/Login';
-import { useState } from 'react';
+import Login from './components/Login'; 
 import RegisterShe from './components/RegisterShe';
 import MyState from './context/data/myState';
 import HireHer from './components/HireHer';
@@ -24,14 +23,6 @@ import ClientRegisterPage from './components/clientRegistation/ClientRegisterPag
 
 function App() {
 
-  const [state, setState] = useState({
-    web3: null,
-    contract: null
-  })
-  const saveState = (state) => {
-    setState(state);
-  }
-
   return (
     <MyState>
 
@@ -41,17 +32,17 @@ function App() {
 
           <Route path="/" element={<Home />} />
 
-          <Route path='/signup' element={<Signup saveState={saveState} />} />
+          <Route path='/signup' element={<Signup />} />
 
-          <Route path='/login' element={<Login state={state} />} />
+          <Route path='/login' element={<Login />} />
 
           <Route path='/join-skillista' element={<RegisterShe />} />
 
-          <Route path='/hire-her' element={<HireHer state={state} />} />
+          <Route path='/hire-her' element={<HireHer />} />
 
-          <Route path='/join-client' element={<ClientRegisterPage state={state} />} />
+          <Route path='/join-client' element={<ClientRegisterPage />} />
 
-          <Route path='/courses-add' element={<CourseAdd state={state} />} />
+          <Route path='/courses-add' element={<CourseAdd />} />
 
           <Route path='/courses' element={<Courses />} />
 
@@ -59,7 +50,7 @@ function App() {
 
           <Route path='/my-courses' element={<MyCourses />} />
 
-          <Route path='/profile/:id/:name' element={<ContactPage state={state} />} />
+          <Route path='/profile/:id/:name' element={<ContactPage />} />
 
         </Routes>
 
